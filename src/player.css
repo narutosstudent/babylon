@@ -24,8 +24,8 @@
   bottom: 0;
   background-image: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.726),
-    rgba(0, 0, 0, 0.212),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.8),
     rgba(0, 0, 0, 0)
   );
 }
@@ -40,6 +40,17 @@
   width: 60px;
   fill: lightcyan;
   filter: drop-shadow(0 0 2px black);
+}
+
+.player__time {
+  position: absolute;
+  bottom: 22px;
+  left: 124px;
+  font-size: 1.7rem;
+  color: lightcyan;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
 }
 
 @keyframes fadeOut {

@@ -1,4 +1,4 @@
-import { createSignal, Match, Show, Switch } from 'solid-js'
+import { createEffect, createSignal, Match, Show, Switch } from 'solid-js'
 
 import dubaiAudio from './assets/dubai.mp3'
 import dubaiVideo from './assets/dubai.mp4'
@@ -9,6 +9,9 @@ export const App = () => {
   const [isVideoPlaying, setIsVideoPlaying] = createSignal(true)
   const [displayAnimationToBeShown, setDisplayAnimationToBeShown] =
     createSignal<'stop' | 'play' | ''>('')
+
+  const [totalTime, setTotalTime] = createSignal('')
+  const [currentTime, setCurrentTime] = createSignal('')
 
   let videoElement: HTMLVideoElement
   let audioElement: HTMLAudioElement
@@ -42,6 +45,30 @@ export const App = () => {
     }
   }
 
+  createEffect(() => {
+    videoElement.onloadedmetadata = function () {
+      if (totalTime() === '' || currentTime() === '') {
+        // Gets us time in format mm:ss
+        setTotalTime(
+          new Date(1000 * videoElement.duration).toISOString().substring(14, 19)
+        )
+        setCurrentTime(
+          new Date(1000 * videoElement.currentTime)
+            .toISOString()
+            .substring(14, 19)
+        )
+      }
+    }
+  })
+
+  function handleProgress(
+    event: Event & { currentTarget: HTMLVideoElement; target: HTMLVideoElement }
+  ) {
+    setCurrentTime(
+      new Date(1000 * event.target.currentTime).toISOString().substring(14, 19)
+    )
+  }
+
   return (
     <main class="background-styles relative h-full w-full">
       <h1 class="sr-only">Dubai, the new Babylon.</h1>
@@ -66,6 +93,7 @@ export const App = () => {
 
         <video
           ref={videoElement}
+          onTimeUpdate={handleProgress}
           class="player__video"
           src={dubaiVideo}
           width="1200"
@@ -77,6 +105,10 @@ export const App = () => {
         <div class="player__controls">
           <div class="progress">
             <div class="progress__filled" />
+          </div>
+
+          <div class="player__time">
+            <span>{currentTime()}</span> / <span>{totalTime()}</span>
           </div>
 
           <button
