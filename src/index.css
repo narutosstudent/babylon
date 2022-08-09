@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .background-styles {
+    background: linear-gradient(to top, black, rgba(0, 0, 0, 0.6)),
+      url(/src/assets/dubai.jpg);
+    background-size: cover;
+    background-position: top;
+  }
+}
+
+@layer base {
+  *,
+  *::after,
+  *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  #root {
+    height: 100%;
+  }
+
+  body {
+    box-sizing: border-box;
+    height: 100%;
+  }
+}

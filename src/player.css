@@ -1,0 +1,68 @@
+.player {
+  position: relative;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.player__video {
+  border-radius: 7px;
+  max-width: max-content;
+  box-shadow: 0 3px 3px black, 0 5px 7px rgba(0, 0, 0, 0.63),
+    0 5px 10px rgba(0, 0, 0, 0.514), 0 3px 15px rgba(0, 0, 0, 0.247);
+}
+
+.player__controls {
+  position: absolute;
+  width: 1200px;
+  height: 150px;
+  z-index: 10;
+  bottom: 0;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.726),
+    rgba(0, 0, 0, 0.212),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.player__button {
+  position: absolute;
+  bottom: 28px;
+  left: 25px;
+}
+
+.player__button svg {
+  width: 60px;
+  fill: lightcyan;
+  filter: drop-shadow(0 0 2px black);
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 0.5;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.display-animation {
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  fill: white;
+  background-color: black;
+  width: 120px;
+  height: 120px;
+  padding: 20px;
+  border-radius: 20px;
+  opacity: 0;
+  animation: 700ms ease-out fadeOut;
+}
