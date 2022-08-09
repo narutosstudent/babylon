@@ -5,6 +5,11 @@ import dubaiVideo from './assets/dubai.mp4'
 import { Play } from './icons/Play'
 import { Stop } from './icons/Stop'
 
+// Gets us time in format mm:ss
+function getFormattedTime(time: number) {
+  return new Date(1000 * time).toISOString().substring(14, 19)
+}
+
 export const App = () => {
   const [isVideoPlaying, setIsVideoPlaying] = createSignal(true)
   const [displayAnimationToBeShown, setDisplayAnimationToBeShown] =
@@ -27,7 +32,6 @@ export const App = () => {
     }
   ) {
     const hasClickedOnVideo = 'videoHeight' in event.target
-
     const isVideoCurrentlyPaused = videoElement.paused
 
     if (hasClickedOnVideo) {
@@ -48,15 +52,8 @@ export const App = () => {
   createEffect(() => {
     videoElement.onloadedmetadata = function () {
       if (totalTime() === '' || currentTime() === '') {
-        // Gets us time in format mm:ss
-        setTotalTime(
-          new Date(1000 * videoElement.duration).toISOString().substring(14, 19)
-        )
-        setCurrentTime(
-          new Date(1000 * videoElement.currentTime)
-            .toISOString()
-            .substring(14, 19)
-        )
+        setTotalTime(getFormattedTime(videoElement.duration))
+        setCurrentTime(getFormattedTime(videoElement.currentTime))
       }
     }
   })
@@ -64,9 +61,7 @@ export const App = () => {
   function handleProgress(
     event: Event & { currentTarget: HTMLVideoElement; target: HTMLVideoElement }
   ) {
-    setCurrentTime(
-      new Date(1000 * event.target.currentTime).toISOString().substring(14, 19)
-    )
+    setCurrentTime(getFormattedTime(event.target.currentTime))
   }
 
   return (
