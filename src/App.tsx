@@ -19,6 +19,7 @@ export const App = () => {
 
   const [totalTime, setTotalTime] = createSignal('')
   const [currentTime, setCurrentTime] = createSignal('')
+  const [currentProgress, setCurrentProgress] = createSignal(0)
 
   let videoElement: HTMLVideoElement
   let audioElement: HTMLAudioElement
@@ -60,15 +61,33 @@ export const App = () => {
     }
   })
 
-  function handleProgress(
+  function handleVideoProgress(
     event: Event & { currentTarget: HTMLVideoElement; target: HTMLVideoElement }
   ) {
     setCurrentTime(getFormattedTime(event.target.currentTime))
+    setCurrentProgress(
+      Math.round((videoElement.currentTime / videoElement.duration) * 100)
+    )
   }
 
   function handleSkipBySeconds(secondsToBeSkipped: number) {
     videoElement.currentTime += secondsToBeSkipped
     setCurrentTime(getFormattedTime(videoElement.currentTime))
+  }
+
+  function handleProgressSliderChange(
+    event: Event & { currentTarget: HTMLInputElement; target: Element }
+  ) {
+    const roundedProgress = Math.round(
+      Number((event.target as HTMLInputElement).value)
+    )
+
+    const percentage = roundedProgress / 100
+    const newTime = percentage * videoElement.duration
+
+    setCurrentProgress(roundedProgress)
+    videoElement.currentTime = newTime
+    setCurrentTime(getFormattedTime(newTime))
   }
 
   return (
@@ -95,18 +114,36 @@ export const App = () => {
 
         <video
           ref={videoElement}
-          onTimeUpdate={handleProgress}
+          onTimeUpdate={handleVideoProgress}
           class="player__video"
           src={dubaiVideo}
           width="1200"
           onClick={togglePause}
           autoplay
           muted
+          loop
         />
 
         <div class="player__controls">
-          <div class="progress">
-            <div class="progress__filled" />
+          <div class="absolute top-0 w-full">
+            <div class="player__slider-wrapper relative w-full">
+              <input
+                type="range"
+                name="progress"
+                min="0"
+                max="100"
+                step="0.1"
+                class="player__slider"
+                onInput={handleProgressSliderChange}
+                value={currentProgress()}
+              />
+              <div
+                class="player__progress-finished"
+                style={{
+                  transform: `scaleX(${currentProgress() * 0.01})`,
+                }}
+              />
+            </div>
           </div>
 
           <div class="player__time">
