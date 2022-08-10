@@ -40,6 +40,12 @@
   width: 60px;
   fill: lightcyan;
   filter: drop-shadow(0 0 2px black);
+  transition: all 0.25s ease;
+}
+
+.player__button:hover svg {
+  filter: drop-shadow(0 0 1px lightcyan);
+  transform: scale(1.02) translateY(-2px);
 }
 
 .player__time {
@@ -51,6 +57,40 @@
   display: flex;
   align-items: center;
   column-gap: 8px;
+}
+
+.player__skip {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 25px;
+  right: 50px;
+  column-gap: 20px;
+}
+
+.player__skip-button {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player__skip-button svg {
+  fill: lightcyan;
+  transition: all 0.2s ease;
+}
+
+.player__skip-button:hover svg {
+  filter: drop-shadow(0 0px 1px lightcyan);
+}
+
+.player__skip-button:hover .backward {
+  transform: rotate(-20deg);
+}
+
+.player__skip-button:hover .forward {
+  transform: rotate(20deg);
 }
 
 @keyframes fadeOut {

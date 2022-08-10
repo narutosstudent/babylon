@@ -2,6 +2,8 @@ import { createEffect, createSignal, Match, Show, Switch } from 'solid-js'
 
 import dubaiAudio from './assets/dubai.mp3'
 import dubaiVideo from './assets/dubai.mp4'
+import { Backward } from './icons/Backward'
+import { Forward } from './icons/Forward'
 import { Play } from './icons/Play'
 import { Stop } from './icons/Stop'
 
@@ -64,6 +66,11 @@ export const App = () => {
     setCurrentTime(getFormattedTime(event.target.currentTime))
   }
 
+  function handleSkipBySeconds(secondsToBeSkipped: number) {
+    videoElement.currentTime += secondsToBeSkipped
+    setCurrentTime(getFormattedTime(videoElement.currentTime))
+  }
+
   return (
     <main class="background-styles relative h-full w-full">
       <h1 class="sr-only">Dubai, the new Babylon.</h1>
@@ -104,6 +111,24 @@ export const App = () => {
 
           <div class="player__time">
             <span>{currentTime()}</span> / <span>{totalTime()}</span>
+          </div>
+
+          <div class="player__skip">
+            <button
+              aria-label="Skip Backward by 30 seconds"
+              class="player__skip-button"
+              onClick={() => handleSkipBySeconds(-30)}
+            >
+              <Backward class="backward" />
+            </button>
+
+            <button
+              aria-label="Skip Forward by 30 seconds"
+              class="player__skip-button"
+              onClick={() => handleSkipBySeconds(30)}
+            >
+              <Forward class="forward" />
+            </button>
           </div>
 
           <button
