@@ -19,15 +19,21 @@
 .player__controls {
   position: absolute;
   width: 1200px;
-  height: 130px;
+  height: 7px;
   z-index: 10;
   bottom: 0;
+  overflow: hidden;
   background-image: linear-gradient(
     to top,
     rgba(0, 0, 0, 1),
     rgba(0, 0, 0, 0.8),
     rgba(0, 0, 0, 0)
   );
+}
+
+.player:hover .player__controls {
+  height: 130px;
+  overflow: unset;
 }
 
 .player__button {
