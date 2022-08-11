@@ -1,6 +1,10 @@
 /* @refresh reload */
-import './index.css'
-import './player.css'
+import './tailwind.css'
+import './styles/player.css'
+import './styles/animations.css'
+import './styles/slider.css'
+import './styles/controls.css'
+
 import { render } from 'solid-js/web'
 
 import { App } from './App'

@@ -1,0 +1,18 @@
+.player {
+  position: relative;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 1200px;
+}
+
+.player__video {
+  border-radius: 7px;
+  max-width: max-content;
+  box-shadow: 0 3px 3px black, 0 5px 7px rgba(0, 0, 0, 0.63),
+    0 5px 10px rgba(0, 0, 0, 0.514), 0 3px 15px rgba(0, 0, 0, 0.247);
+}

@@ -1,0 +1,90 @@
+.player__controls {
+  position: absolute;
+  width: 1200px;
+  height: 7px;
+  z-index: 10;
+  bottom: 0;
+  overflow: hidden;
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.player:hover .player__controls {
+  height: 130px;
+  overflow: unset;
+}
+
+.player__button {
+  position: absolute;
+  bottom: 28px;
+  left: 25px;
+}
+
+.player__button svg {
+  width: 60px;
+  fill: lightcyan;
+  filter: drop-shadow(0 0 2px black);
+  transition: all 0.25s ease;
+}
+
+.player__button:hover svg {
+  filter: drop-shadow(0 0 1px lightcyan);
+  transform: scale(1.02) translateY(-2px);
+}
+
+.player__time {
+  position: absolute;
+  bottom: 22px;
+  left: 124px;
+  font-size: 1.7rem;
+  color: lightcyan;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.player__skip {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 25px;
+  right: 50px;
+  column-gap: 20px;
+}
+
+.player__skip-button {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player__skip-button svg {
+  fill: lightcyan;
+  transition: all 0.2s ease;
+}
+
+.player__skip-button:hover svg {
+  filter: drop-shadow(0 0px 1px lightcyan);
+}
+
+.player__skip-button:hover .backward {
+  transform: rotate(-20deg);
+}
+
+.player__skip-button:hover .forward {
+  transform: rotate(20deg);
+}
+
+.player__progress-finished {
+  position: absolute;
+  height: 6px;
+  width: 100%;
+  background-color: rgb(209, 0, 0);
+  transform-origin: left;
+}
