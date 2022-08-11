@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  width: 1200px;
 }
 
 .player__video {
@@ -167,6 +168,7 @@
   z-index: 10;
   transform: scale(0);
   transition: 150ms all ease;
+  box-shadow: 0 0px 5px rgba(224, 255, 255, 0.5);
 }
 
 .player__slider:focus::-webkit-slider-runnable-track {
