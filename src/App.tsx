@@ -14,7 +14,7 @@ function getFormattedTime(time: number) {
 }
 
 export const App = () => {
-  const [isVideoPlaying, setIsVideoPlaying] = createSignal(true)
+  const [isVideoPlaying, setIsVideoPlaying] = createSignal(false)
   const [displayAnimationToBeShown, setDisplayAnimationToBeShown] =
     createSignal<'stop' | 'play' | ''>('')
 
@@ -96,13 +96,7 @@ export const App = () => {
   return (
     <main class="background-styles relative h-full w-full">
       <h1 class="sr-only">Dubai, the new Babylon.</h1>
-      <audio
-        autoplay
-        loop
-        src={dubaiAudio}
-        class="sr-only"
-        ref={audioElement}
-      />
+      <audio loop src={dubaiAudio} class="sr-only" ref={audioElement} />
 
       <Show when={isLoadingVideoMetadata()}>
         <Spinner />
@@ -128,7 +122,6 @@ export const App = () => {
           src={dubaiVideo}
           width="1200"
           onClick={togglePause}
-          autoplay
           muted
           loop
         />
