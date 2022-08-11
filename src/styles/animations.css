@@ -8,6 +8,15 @@
   }
 }
 
+@keyframes spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .display-animation {
   position: absolute;
   top: 47%;
@@ -21,4 +30,18 @@
   border-radius: 20px;
   opacity: 0;
   animation: 700ms ease-out fadeOut;
+}
+
+.spinner {
+  position: absolute;
+  top: 37%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  animation: 300ms spinning infinite linear;
+}
+
+.spinner path {
+  fill: lightcyan;
 }

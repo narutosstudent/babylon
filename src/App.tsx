@@ -2,6 +2,7 @@ import { createEffect, createSignal, Match, Show, Switch } from 'solid-js'
 
 import dubaiAudio from './assets/dubai.mp3'
 import dubaiVideo from './assets/dubai.mp4'
+import { Spinner } from './components/Spinner'
 import { Backward } from './icons/Backward'
 import { Forward } from './icons/Forward'
 import { Play } from './icons/Play'
@@ -20,6 +21,7 @@ export const App = () => {
   const [totalTime, setTotalTime] = createSignal('')
   const [currentTime, setCurrentTime] = createSignal('')
   const [currentProgress, setCurrentProgress] = createSignal(0)
+  const [isLoadingVideoMetadata, setIsLoadingVideoMetadata] = createSignal(true)
 
   let videoElement: HTMLVideoElement
   let audioElement: HTMLAudioElement
@@ -55,6 +57,7 @@ export const App = () => {
   createEffect(() => {
     videoElement.onloadedmetadata = function () {
       if (totalTime() === '' || currentTime() === '') {
+        setIsLoadingVideoMetadata(false)
         setTotalTime(getFormattedTime(videoElement.duration))
         setCurrentTime(getFormattedTime(videoElement.currentTime))
       }
@@ -101,7 +104,14 @@ export const App = () => {
         ref={audioElement}
       />
 
-      <div class="player">
+      <Show when={isLoadingVideoMetadata()}>
+        <Spinner />
+      </Show>
+
+      <div
+        class="player"
+        style={{ visibility: isLoadingVideoMetadata() ? 'hidden' : 'visible' }}
+      >
         <Switch>
           <Match when={displayAnimationToBeShown() === 'stop'}>
             <Stop class="display-animation" />
