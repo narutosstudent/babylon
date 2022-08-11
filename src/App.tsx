@@ -99,7 +99,6 @@ export const App = () => {
         src={dubaiAudio}
         class="sr-only"
         ref={audioElement}
-        muted
       />
 
       <div class="player">
